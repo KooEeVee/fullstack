@@ -13,7 +13,7 @@ const Button = (props) => (
   </button>
 )
 
-const Result = (props) => {
+const StatisticLine = (props) => {
   return (
     <p>{props.text} {props.count} {props.text2} </p>
   )
@@ -28,12 +28,12 @@ const Statistics = (props) => {
   }
   return (
     <>
-    <Result text="good" count={props.good} />
-    <Result text="neutral" count={props.neutral} />
-    <Result text="bad" count={props.bad} />
-    <Result text="all" count={props.allClicks} />
-    <Result text="average" count={props.good-props.bad/props.allClicks} />
-    <Result text="positive" count={props.good/props.allClicks} text2="%" />
+    <StatisticLine text="good" count={props.good} />
+    <StatisticLine text="neutral" count={props.neutral} />
+    <StatisticLine text="bad" count={props.bad} />
+    <StatisticLine text="all" count={props.allClicks} />
+    <StatisticLine text="average" count={props.good-props.bad/props.allClicks} />
+    <StatisticLine text="positive" count={props.good/props.allClicks} text2="%" />
     </>
   )
 }
