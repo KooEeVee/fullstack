@@ -13,9 +13,23 @@ const Button = (props) => (
   </button>
 )
 
+const Result = (props) => {
+  return (
+    <tr>
+      <td>{props.text}</td>
+      <td>{props.count}</td>
+    </tr>
+    
+  )
+}
+
 const StatisticLine = (props) => {
   return (
-    <p>{props.text} {props.count} {props.text2} </p>
+    <tr>
+      <td>{props.text}</td>
+      <td>{props.count.toFixed(2)} {props.text2}</td>
+    </tr>
+    
   )
 }
 
@@ -28,12 +42,16 @@ const Statistics = (props) => {
   }
   return (
     <>
-    <StatisticLine text="good" count={props.good} />
-    <StatisticLine text="neutral" count={props.neutral} />
-    <StatisticLine text="bad" count={props.bad} />
-    <StatisticLine text="all" count={props.allClicks} />
-    <StatisticLine text="average" count={props.good-props.bad/props.allClicks} />
-    <StatisticLine text="positive" count={props.good/props.allClicks} text2="%" />
+    <table>
+      <tbody>
+        <Result text="good" count={props.good} />
+        <Result text="neutral" count={props.neutral} />
+        <Result text="bad" count={props.bad} />
+        <Result text="all" count={props.allClicks} />
+        <StatisticLine text="average" count={props.good-props.bad/props.allClicks} />
+        <StatisticLine text="positive" count={props.good/props.allClicks} text2="%" />
+      </tbody>
+    </table>
     </>
   )
 }
