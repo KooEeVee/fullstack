@@ -1,17 +1,34 @@
 import React from "react";
 import { useState } from "react";
 
-const Button = (props) => (
-  <button onClick={props.handleClick}>
-    {props.text}
-  </button>
-)
+
+const Header = (props) => {
+  return (
+      <h1>{props.header}</h1>
+  )
+}
 
 const Votes = (props) => {
   return (
     <p>has votes {props.votes}</p>
   )
 }
+
+const Anecdote = (props) => {
+  return (
+    <>
+    <p>{props.anecdote}</p>
+    <Votes votes={props.votes} />
+    </>
+  )
+}
+
+const Button = (props) => (
+  <button onClick={props.handleClick}>
+    {props.text}
+  </button>
+)
+
 
 const App = () => {
   const anecdotes = [
@@ -25,27 +42,28 @@ const App = () => {
   ]
   const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState([0,0,0,0,0,0,0])
+  const [popular, setPopular] = useState(0)
 
   const handleClickRandom = () => {
     setSelected(Math.floor(Math.random() * 7))
-    console.log(selected)
-    console.log(votes)
+    setPopular(votes.indexOf(Math.max(...votes)))
   }
 
   const handleClickVote = () => {
     const updateVotes = [...votes]
     updateVotes[selected] += 1
     setVotes(updateVotes)
-    console.log(votes[selected])
-    console.log(votes)
+    setPopular(votes.indexOf(Math.max(...votes)))
   }
 
   return (
     <div>
-      <p>{anecdotes[selected]}</p>
-      <Votes votes={votes[selected]} />
+      <Header header="Anecdote of the day" />
+      <Anecdote anecdote={anecdotes[selected]} votes={votes[selected]} />
       <Button text="next anecdote" handleClick={handleClickRandom} />
       <Button text="vote" handleClick={handleClickVote} />
+      <Header header="Anecdote with most votes" />
+      <Anecdote anecdote={anecdotes[popular]} votes={votes[popular]} />
     </div>
   );
 }
